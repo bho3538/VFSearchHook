@@ -7,3 +7,5 @@ see  https://lfconfig.wordpress.com/2020/10/14/use-default-searchband-in-namespa
 License : MIT
 
 supported os : Windows Vista ~
+
+Using minhook library for api hook.
