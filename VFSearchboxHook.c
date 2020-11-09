@@ -46,18 +46,18 @@ __declspec(dllexport) PVFSEARCHHOOKINFO VFAddRefSearchHook(PVOID pDefView,HWND h
 	IUnknown* pSearchTarget = NULL;
 	HRESULT hr = E_FAIL;
 	MH_STATUS hookStatus;
-	HWND topHwnd = hwnd;
+	//HWND topHwnd = hwnd;
 
-	for (;;) {
-		topHwnd = GetParent(hwnd);
-		if (topHwnd) {
-			hwnd = topHwnd;
-		}
-		else {
-			topHwnd = hwnd;
-			break;
-		}
-	}
+	//for (;;) {
+	//	topHwnd = GetParent(hwnd);
+	//	if (topHwnd) {
+	//		hwnd = topHwnd;
+	//	}
+	//	else {
+	//		topHwnd = hwnd;
+	//		break;
+	//	}
+	//}
 
 
 	if (!pDefView) {
@@ -72,7 +72,9 @@ __declspec(dllexport) PVFSEARCHHOOKINFO VFAddRefSearchHook(PVOID pDefView,HWND h
 		goto escapeArea;
 	}
 
-	info = _VFGetItemFromSearchList(topHwnd);
+	hwnd = GetAncestor(hwnd, GA_ROOT);
+
+	info = _VFGetItemFromSearchList(hwnd);
 
 	if (info) {
 		//add ref count
@@ -93,7 +95,7 @@ __declspec(dllexport) PVFSEARCHHOOKINFO VFAddRefSearchHook(PVOID pDefView,HWND h
 		info->dwSize = sizeof(VFSEARCHHOOKINFOINT);
 		info->callback = callback;
 		info->dwRefCount = 1;
-		info->hwnd = topHwnd;
+		info->hwnd = hwnd;
 
 		InitializeCriticalSection(&info->lockRef);
 
