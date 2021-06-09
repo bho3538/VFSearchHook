@@ -94,6 +94,7 @@ __declspec(dllexport) PVFSEARCHHOOKINFO VFAddRefSearchHook(PVOID pDefView,HWND h
 
 		info->dwSize = sizeof(VFSEARCHHOOKINFOINT);
 		info->callback = callback;
+		info->userData = userData;
 		info->dwRefCount = 1;
 		info->hwnd = hwnd;
 
